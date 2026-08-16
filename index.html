@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pro-Beat X900 // Drum Machine</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- FreeCodeCamp Test Suite Script CDN (Optional for testing) -->
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" defer></script>
+</head>
+
+<body>
+    <div class="studio-container">
+        <div class="studio-glow"></div>
+
+        <main id="drum-machine">
+            <!-- Sampler Header -->
+            <header class="sampler-header">
+                <div class="brand-section">
+                    <div class="brand-logo-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <div class="brand-info">
+                        <h1 class="brand-title">PRO-BEAT X900</h1>
+                        <span class="brand-subtitle">CYBERPUNK SAMPLER ENGINE</span>
+                    </div>
+                </div>
+
+                <div class="hardware-screws">
+                    <div class="screw"></div>
+                    <div class="screw"></div>
+                </div>
+            </header>
+
+            <!-- Main Sampler Hardware Body -->
+            <div class="sampler-body">
+                <!-- 3x3 Silicone Pad Bank -->
+                <section id="pad-bank" aria-label="Drum Pads">
+                    <!-- Row 1 -->
+                    <button class="drum-pad" data-drum-name="Heater 1" data-row="1" id="drum-pad-Q" title="Press Q">
+                        <span class="pad-key">Q</span>
+                        <span class="pad-sound-label">Heater 1</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/Heater-1.mp3" id="Q" class="clip" preload="auto"></audio>
+                    </button>
+                    <button class="drum-pad" data-drum-name="Heater 2" data-row="1" id="drum-pad-W" title="Press W">
+                        <span class="pad-key">W</span>
+                        <span class="pad-sound-label">Heater 2</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/Heater-2.mp3" id="W" class="clip" preload="auto"></audio>
+                    </button>
+                    <button class="drum-pad" data-drum-name="Heater 3" data-row="1" id="drum-pad-E" title="Press E">
+                        <span class="pad-key">E</span>
+                        <span class="pad-sound-label">Heater 3</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/Heater-3.mp3" id="E" class="clip" preload="auto"></audio>
+                    </button>
+
+                    <!-- Row 2 -->
+                    <button class="drum-pad" data-drum-name="Heater 4" data-row="2" id="drum-pad-A" title="Press A">
+                        <span class="pad-key">A</span>
+                        <span class="pad-sound-label">Heater 4</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/Heater-4_1.mp3" id="A" class="clip" preload="auto"></audio>
+                    </button>
+                    <button class="drum-pad" data-drum-name="Clap" data-row="2" id="drum-pad-S" title="Press S">
+                        <span class="pad-key">S</span>
+                        <span class="pad-sound-label">Clap</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/Heater-6.mp3" id="S" class="clip" preload="auto"></audio>
+                    </button>
+                    <button class="drum-pad" data-drum-name="Open-HH" data-row="2" id="drum-pad-D" title="Press D">
+                        <span class="pad-key">D</span>
+                        <span class="pad-sound-label">Open-HH</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/Dsc_Oh.mp3" id="D" class="clip" preload="auto"></audio>
+                    </button>
+
+                    <!-- Row 3 -->
+                    <button class="drum-pad" data-drum-name="Kick-n'-Hat" data-row="3" id="drum-pad-Z" title="Press Z">
+                        <span class="pad-key">Z</span>
+                        <span class="pad-sound-label">Kick-n'-Hat</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/Kick_n_Hat.mp3" id="Z" class="clip" preload="auto"></audio>
+                    </button>
+                    <button class="drum-pad" data-drum-name="Kick" data-row="3" id="drum-pad-X" title="Press X">
+                        <span class="pad-key">X</span>
+                        <span class="pad-sound-label">Kick</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/RP4_KICK_1.mp3" id="X" class="clip" preload="auto"></audio>
+                    </button>
+                    <button class="drum-pad" data-drum-name="Closed-HH" data-row="3" id="drum-pad-C" title="Press C">
+                        <span class="pad-key">C</span>
+                        <span class="pad-sound-label">Closed-HH</span>
+                        <audio src="https://cdn.freecodecamp.org/curriculum/drum/Cev_H2.mp3" id="C" class="clip" preload="auto"></audio>
+                    </button>
+                </section>
+
+                <!-- Sampler Controls & OLED Screen -->
+                <section class="sampler-controls" aria-label="Controls and Screen">
+                    <!-- OLED Screen Container -->
+                    <div class="oled-screen-container">
+                        <div class="oled-meta">
+                            <span class="oled-badge" id="bank-label">KIT: HEATER CLASSIC</span>
+                            <div class="oled-status-pill">
+                                <span class="status-dot"></span>
+                                <span id="power-status-text">ONLINE</span>
+                            </div>
+                        </div>
+
+                        <!-- Target #display for FreeCodeCamp -->
+                        <div id="display">READY</div>
+
+                        <!-- Audio EQ Visualizer Bars -->
+                        <div class="oled-visualizer" id="visualizer">
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Hardware Toggles Group -->
+                    <div class="control-switches-group">
+                        <div class="control-card">
+                            <span class="control-label">Power <span>⚡</span></span>
+                            <div class="toggle-wrapper">
+                                <label class="switch" for="power-toggle">
+                                    <input type="checkbox" id="power-toggle" checked />
+                                    <span class="slider-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="control-card bank-switch-container">
+                            <span class="control-label">Bank <span id="bank-mode-badge">KIT 1</span></span>
+                            <div class="toggle-wrapper">
+                                <label class="switch" for="bank-toggle">
+                                    <input type="checkbox" id="bank-toggle" />
+                                    <span class="slider-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Master Volume Section -->
+                    <div class="volume-control-section">
+                        <div class="control-label">
+                            <span>Master Volume</span>
+                            <span id="volume-val-display">80%</span>
+                        </div>
+                        <div class="volume-slider-wrapper">
+                            <span class="volume-icon">🔈</span>
+                            <input type="range" min="0" max="100" value="80" class="volume-range" id="volume-slider" aria-label="Volume Slider" />
+                            <span class="volume-icon">🔊</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sampler Footer -->
+            <footer class="sampler-footer">
+                <div class="hotkey-hints">
+                    <span>HOTKEYS:</span>
+                    <span class="key-badge">Q</span>
+                    <span class="key-badge">W</span>
+                    <span class="key-badge">E</span>
+                    <span class="key-badge">A</span>
+                    <span class="key-badge">S</span>
+                    <span class="key-badge">D</span>
+                    <span class="key-badge">Z</span>
+                    <span class="key-badge">X</span>
+                    <span class="key-badge">C</span>
+                </div>
+                <div>STUDIO 24-BIT STEREO SAMPLER</div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Main Logic Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>

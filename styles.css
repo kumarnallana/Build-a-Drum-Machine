@@ -1,0 +1,752 @@
+/* ==========================================================================
+   PRO-BEAT X900 // CYBERPUNK MPC DRUM MACHINE STYLES
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --bg-main: #0a0c12;
+    --bg-dots: rgba(255, 255, 255, 0.03);
+    
+    /* Hardware Chassis Colors */
+    --chassis-bg: #141720;
+    --chassis-surface: #1b1f2b;
+    --chassis-surface-highlight: #232838;
+    --chassis-border: #2a3144;
+    --chassis-shadow: rgba(0, 0, 0, 0.7);
+    --metal-gradient: linear-gradient(180deg, #2d3345 0%, #171b26 100%);
+    --bezel-gradient: linear-gradient(135deg, #323a4f 0%, #10121a 100%);
+    
+    /* Neon Colors & Glows */
+    --neon-cyan: #00f2fe;
+    --neon-cyan-dim: rgba(0, 242, 254, 0.15);
+    --neon-cyan-glow: rgba(0, 242, 254, 0.5);
+    
+    --neon-amber: #ffaa00;
+    --neon-amber-dim: rgba(255, 170, 0, 0.15);
+    --neon-amber-glow: rgba(255, 170, 0, 0.5);
+    
+    --neon-magenta: #f72585;
+    --neon-magenta-dim: rgba(247, 37, 133, 0.15);
+    --neon-magenta-glow: rgba(247, 37, 133, 0.5);
+    
+    --neon-emerald: #10b981;
+    --neon-emerald-glow: rgba(16, 185, 129, 0.6);
+
+    /* Text Colors */
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #4b5563;
+    --text-accent: #00f2fe;
+    
+    /* Display OLED Colors */
+    --oled-bg: #05080c;
+    --oled-border: #132230;
+    --oled-glow: rgba(0, 242, 254, 0.15);
+    
+    /* Pad Styles */
+    --pad-bg: #1e2330;
+    --pad-bg-hover: #262c3d;
+    --pad-border: #2d354a;
+    --pad-shadow: rgba(0, 0, 0, 0.5);
+    
+    /* Transitions */
+    --trans-fast: 0.1s ease;
+    --trans-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Reset & Studio Background */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(247, 37, 133, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 0% 100%, rgba(255, 170, 0, 0.05) 0%, transparent 40%),
+        radial-gradient(var(--bg-dots) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* Background Atmosphere Glow */
+.studio-container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    justify-content: center;
+}
+
+.studio-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.12) 0%, transparent 70%);
+    filter: blur(40px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   DRUM MACHINE HARDWARE CHASSIS
+   ========================================================================== */
+#drum-machine {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: var(--chassis-bg);
+    border-radius: 20px;
+    border: 1px solid var(--chassis-border);
+    box-shadow: 
+        0 25px 50px -12px var(--chassis-shadow),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.6);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow: hidden;
+}
+
+/* Hardware Chassis Header */
+.sampler-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.brand-logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--metal-gradient);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px var(--neon-cyan-dim);
+    color: var(--neon-cyan);
+}
+
+.brand-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: 0.15em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    line-height: 1.2;
+    background: linear-gradient(90deg, #ffffff 0%, #cbd5e1 50%, var(--neon-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--neon-cyan);
+    opacity: 0.8;
+}
+
+.hardware-screws {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.screw {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1e222e;
+    border: 1px solid #363e52;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.screw::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 1.5px;
+    background: #4a546d;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* ==========================================================================
+   MAIN SAMPLER BODY (2-COLUMN GRID)
+   ========================================================================== */
+.sampler-body {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1.75rem;
+    align-items: stretch;
+}
+
+@media (max-width: 820px) {
+    .sampler-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   PAD BANK (3x3 SILICONE DRUM PADS)
+   ========================================================================== */
+#pad-bank {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    background: #11141c;
+    padding: 1.25rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.drum-pad {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    min-height: 90px;
+    background: var(--pad-bg);
+    border: 1px solid var(--pad-border);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    color: var(--text-primary);
+    outline: none;
+    box-shadow: 
+        0 6px 0 #12151e,
+        0 8px 12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.drum-pad:hover {
+    background: var(--pad-bg-hover);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.drum-pad .pad-key {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    transition: color 0.1s ease, text-shadow 0.1s ease;
+}
+
+.drum-pad .pad-sound-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    pointer-events: none;
+    max-width: 85%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.1s ease;
+}
+
+/* Color Accent Coding per Row */
+/* Row 1 (Q, W, E) - Amber Glow */
+.drum-pad[data-row="1"] .pad-key {
+    color: #ffc247;
+}
+.drum-pad[data-row="1"]:hover {
+    border-color: rgba(255, 170, 0, 0.4);
+    box-shadow: 0 6px 0 #12151e, 0 8px 15px rgba(255, 170, 0, 0.15);
+}
+
+/* Row 2 (A, S, D) - Cyan Glow */
+.drum-pad[data-row="2"] .pad-key {
+    color: #38ef7d;
+}
+.drum-pad[data-row="2"]:hover {
+    border-color: rgba(56, 239, 125, 0.4);
+    box-shadow: 0 6px 0 #12151e, 0 8px 15px rgba(56, 239, 125, 0.15);
+}
+
+/* Row 3 (Z, X, C) - Magenta Glow */
+.drum-pad[data-row="3"] .pad-key {
+    color: #ff52a2;
+}
+.drum-pad[data-row="3"]:hover {
+    border-color: rgba(255, 82, 162, 0.4);
+    box-shadow: 0 6px 0 #12151e, 0 8px 15px rgba(255, 82, 162, 0.15);
+}
+
+/* Active / Pressed Pad State (Dynamic Lighting) */
+.drum-pad:active,
+.drum-pad.active {
+    transform: translateY(4px) scale(0.98);
+    box-shadow: 
+        0 2px 0 #12151e,
+        0 2px 6px rgba(0, 0, 0, 0.6),
+        inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.drum-pad[data-row="1"].active {
+    background: #422d05;
+    border-color: var(--neon-amber);
+    box-shadow: 
+        0 2px 0 #12151e,
+        0 0 20px var(--neon-amber-glow),
+        inset 0 0 12px rgba(255, 170, 0, 0.4);
+}
+.drum-pad[data-row="1"].active .pad-key {
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffaa00, 0 0 20px #ffaa00;
+}
+.drum-pad[data-row="1"].active .pad-sound-label {
+    color: #ffdd99;
+}
+
+.drum-pad[data-row="2"].active {
+    background: #02382c;
+    border-color: #38ef7d;
+    box-shadow: 
+        0 2px 0 #12151e,
+        0 0 20px rgba(56, 239, 125, 0.6),
+        inset 0 0 12px rgba(56, 239, 125, 0.4);
+}
+.drum-pad[data-row="2"].active .pad-key {
+    color: #ffffff;
+    text-shadow: 0 0 10px #38ef7d, 0 0 20px #38ef7d;
+}
+.drum-pad[data-row="2"].active .pad-sound-label {
+    color: #a8ffd0;
+}
+
+.drum-pad[data-row="3"].active {
+    background: #3e0c24;
+    border-color: var(--neon-magenta);
+    box-shadow: 
+        0 2px 0 #12151e,
+        0 0 20px var(--neon-magenta-glow),
+        inset 0 0 12px rgba(247, 37, 133, 0.4);
+}
+.drum-pad[data-row="3"].active .pad-key {
+    color: #ffffff;
+    text-shadow: 0 0 10px #f72585, 0 0 20px #f72585;
+}
+.drum-pad[data-row="3"].active .pad-sound-label {
+    color: #ffb8da;
+}
+
+/* ==========================================================================
+   SAMPLER CONTROL PANEL & OLED DISPLAY
+   ========================================================================== */
+.sampler-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    background: #161a24;
+    padding: 1.25rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* OLED Display Box */
+.oled-screen-container {
+    position: relative;
+    background: var(--oled-bg);
+    border: 2px solid var(--oled-border);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.9),
+        0 0 15px var(--oled-glow);
+    overflow: hidden;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Screen Scanlines Texture */
+.oled-screen-container::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 2;
+    background-size: 100% 3px, 6px 100%;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Glass Reflection */
+.oled-screen-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.oled-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 4;
+}
+
+.oled-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--neon-cyan);
+    opacity: 0.8;
+}
+
+.oled-status-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--neon-emerald);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--neon-emerald);
+    box-shadow: 0 0 8px var(--neon-emerald-glow);
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* The FreeCodeCamp Target #display element */
+#display {
+    position: relative;
+    z-index: 4;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 12px var(--neon-cyan-glow), 0 0 24px rgba(0, 242, 254, 0.3);
+    margin: 0.5rem 0;
+    min-height: 1.8rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Audio EQ Visualizer inside Screen */
+.oled-visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 22px;
+    position: relative;
+    z-index: 4;
+}
+
+.eq-bar {
+    flex: 1;
+    background: var(--neon-cyan);
+    opacity: 0.5;
+    border-radius: 2px 2px 0 0;
+    height: 4px;
+    transition: height 0.1s ease, opacity 0.1s ease, background-color 0.15s ease;
+}
+
+.eq-bar.active {
+    opacity: 1;
+    box-shadow: 0 0 6px var(--neon-cyan);
+}
+
+/* Hardware Sliders and Switch Controls */
+.control-switches-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.control-card {
+    background: #11141c;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.control-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Toggle Switch Design */
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider-switch {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #202636;
+    border: 1px solid #363f55;
+    border-radius: 24px;
+    transition: var(--trans-smooth);
+}
+
+.slider-switch::before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #8b949e;
+    border-radius: 50%;
+    transition: var(--trans-smooth);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+input:checked + .slider-switch {
+    background-color: #064030;
+    border-color: var(--neon-emerald);
+}
+
+input:checked + .slider-switch::before {
+    transform: translateX(24px);
+    background-color: var(--neon-emerald);
+    box-shadow: 0 0 10px var(--neon-emerald-glow);
+}
+
+/* Bank Toggle Switch */
+.bank-switch-container input:checked + .slider-switch {
+    background-color: #422a08;
+    border-color: var(--neon-amber);
+}
+
+.bank-switch-container input:checked + .slider-switch::before {
+    background-color: var(--neon-amber);
+    box-shadow: 0 0 10px var(--neon-amber-glow);
+}
+
+/* Master Volume Slider */
+.volume-control-section {
+    background: #11141c;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.volume-slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.volume-icon {
+    color: var(--neon-cyan);
+    font-size: 0.9rem;
+}
+
+.volume-range {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #202636;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--metal-gradient);
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 8px var(--neon-cyan-glow);
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.volume-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 14px var(--neon-cyan);
+}
+
+.volume-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--metal-gradient);
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 8px var(--neon-cyan-glow);
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   FOOTER INFO & HOTKEY HINTS
+   ========================================================================== */
+.sampler-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.hotkey-hints {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.key-badge {
+    background: #1e2330;
+    border: 1px solid #363f55;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 0.68rem;
+    font-weight: 600;
+}
+
+/* Power Off State */
+#drum-machine.power-off .drum-pad {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+#drum-machine.power-off .oled-screen-container {
+    background: #020305;
+    box-shadow: none;
+}
+
+#drum-machine.power-off #display {
+    color: transparent;
+    text-shadow: none;
+}
+
+#drum-machine.power-off .oled-badge,
+#drum-machine.power-off .oled-status-pill,
+#drum-machine.power-off .oled-visualizer {
+    opacity: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    #drum-machine {
+        padding: 1.1rem;
+        gap: 1.1rem;
+    }
+    
+    .brand-title {
+        font-size: 1rem;
+    }
+    
+    #pad-bank {
+        gap: 0.6rem;
+        padding: 0.75rem;
+    }
+    
+    .drum-pad {
+        min-height: 72px;
+        border-radius: 8px;
+    }
+    
+    .drum-pad .pad-key {
+        font-size: 1.35rem;
+    }
+    
+    .drum-pad .pad-sound-label {
+        font-size: 0.58rem;
+    }
+    
+    .control-switches-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .sampler-footer {
+        flex-direction: column;
+        gap: 0.6rem;
+        text-align: center;
+    }
+}
